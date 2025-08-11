@@ -1,0 +1,42 @@
+{
+  "name": "speech-to-sign",
+  "version": "1.0.0",
+  "description": "Real-time speech to sign language video system",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "start": "cd backend && npm start",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "setup-videos": "node scripts/video-setup.js",
+    "setup-s3": "node scripts/aws-s3-setup.js",
+    "setup-google-cloud": "node scripts/google-cloud-setup.js",
+    "setup-google-web": "node scripts/google-cloud-web-setup.js",
+    "upload-videos": "node scripts/aws-s3-setup.js upload",
+    "test-videos": "node scripts/aws-s3-setup.js test",
+    "convert-video": "./scripts/convert-video.sh",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "mime-types": "^2.1.35"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/speech-to-sign"
+  },
+  "keywords": [
+    "sign-language",
+    "accessibility",
+    "speech-recognition",
+    "real-time"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

@@ -1,0 +1,61 @@
+phrase,gloss,category,video_filename,spoken_variants,duration_ms,notes
+hello,HELLO,greetings,HELLO.mp4,"hello,hi",2000,Basic greeting
+good morning,GOOD MORNING,greetings,GOOD-MORNING.mp4,"good morning,morning",2500,Time-specific greeting
+good night,GOOD NIGHT,greetings,GOOD-NIGHT.mp4,"good night,goodnight,night",2500,Time-specific greeting
+please,PLEASE,politeness,PLEASE.mp4,"please,plz",1500,Polite request
+thank you,THANK-YOU,politeness,THANK-YOU.mp4,"thank you,thanks,ty",2000,Gratitude expression
+sorry,SORRY,politeness,SORRY.mp4,"sorry,apologize,my apologies",2000,Apology
+excuse me,EXCUSE-ME,politeness,EXCUSE-ME.mp4,"excuse me,pardon me",2500,Attention getter
+yes,YES,responses,YES.mp4,"yes,yeah,yep,correct",1500,Positive response
+no,NO,responses,NO.mp4,"no,nope,negative",1500,Negative response
+maybe,MAYBE,responses,MAYBE.mp4,"maybe,perhaps,possibly",2000,Uncertain response
+help,HELP,requests,HELP.mp4,"help,assist me,need help",2000,Assistance request
+stop,STOP,commands,STOP.mp4,"stop,halt,cease",1500,Stop action
+wait,WAIT,commands,WAIT.mp4,"wait,hold on,one moment",2000,Pause request
+come here,COME HERE,commands,COME-HERE.mp4,"come here,come over",2500,Movement request
+go,GO,commands,GO.mp4,"go,leave,depart",1500,Movement command
+where,WHERE,questions,WHERE.mp4,"where,location",1500,Location question
+when,WHEN,questions,WHEN.mp4,"when,what time",1500,Time question  
+who,WHO,questions,WHO.mp4,"who,which person",1500,Person question
+what,WHAT,questions,WHAT.mp4,"what,which thing",1500,Object question
+why,WHY,questions,WHY.mp4,"why,for what reason",1500,Reason question
+how,HOW,questions,HOW.mp4,"how,in what way",1500,Method question
+I don't understand,NOT-UNDERSTAND,communication,NOT-UNDERSTAND.mp4,"i don't understand,i don't get it,confused",3000,Comprehension difficulty
+do you understand,UNDERSTAND YOU,communication,UNDERSTAND-YOU.mp4,"do you understand,understand,get it",3000,Comprehension check
+speak slower,SLOW,communication,SLOW.mp4,"speak slower,slow down,slower please",2500,Speed adjustment
+repeat please,AGAIN PLEASE,communication,AGAIN-PLEASE.mp4,"repeat please,say again,one more time",3000,Repetition request
+name,NAME,identity,NAME.mp4,"name,called",1500,Identity reference
+my name is,MY NAME,identity,MY-NAME.mp4,"my name is,i am called,i am",2500,Self introduction
+your name,YOU NAME,identity,YOU-NAME.mp4,"your name,what's your name,who are you",2500,Name inquiry
+nice to meet you,NICE MEET-YOU,social,NICE-MEET-YOU.mp4,"nice to meet you,pleasure meeting you,good to meet you",3500,Social pleasantry
+goodbye,GOODBYE,farewells,GOODBYE.mp4,"goodbye,bye,see you later",2000,Farewell
+one,ONE,numbers,ONE.mp4,"one,1",1000,Number
+two,TWO,numbers,TWO.mp4,"two,2",1000,Number
+three,THREE,numbers,THREE.mp4,"three,3",1000,Number
+four,FOUR,numbers,FOUR.mp4,"four,4",1000,Number
+five,FIVE,numbers,FIVE.mp4,"five,5",1000,Number
+six,SIX,numbers,SIX.mp4,"six,6",1000,Number
+seven,SEVEN,numbers,SEVEN.mp4,"seven,7",1000,Number
+eight,EIGHT,numbers,EIGHT.mp4,"eight,8",1000,Number
+nine,NINE,numbers,NINE.mp4,"nine,9",1000,Number
+ten,TEN,numbers,TEN.mp4,"ten,10",1000,Number
+eat,EAT,actions,EAT.mp4,"eat,eating,food",2000,Food action
+drink,DRINK,actions,DRINK.mp4,"drink,drinking,beverage",2000,Drink action
+bathroom,BATHROOM,locations,BATHROOM.mp4,"bathroom,toilet,restroom,washroom",2000,Location
+doctor,DOCTOR,people,DOCTOR.mp4,"doctor,physician,medical",2000,Medical professional
+emergency,EMERGENCY,urgent,EMERGENCY.mp4,"emergency,urgent,crisis,911",2500,Crisis situation
+danger,DANGER,urgent,DANGER.mp4,"danger,dangerous,warning,unsafe",2500,Warning
+police,POLICE,people,POLICE.mp4,"police,officer,cop,law enforcement",2000,Law enforcement
+money,MONEY,objects,MONEY.mp4,"money,cash,dollars,payment",2000,Currency
+where is,WHERE,questions,WHERE-IS.mp4,"where is,location of,where can i find",2500,Location inquiry
+how much,HOW-MUCH,questions,HOW-MUCH.mp4,"how much,cost,price,what does it cost",2500,Price inquiry
+I am lost,LOST,problems,LOST.mp4,"i am lost,lost,can't find my way,confused about location",3000,Navigation problem
+call help,CALL HELP,urgent,CALL-HELP.mp4,"call help,get help,need assistance,call someone",3000,Emergency assistance
+I need water,NEED WATER,needs,NEED-WATER.mp4,"i need water,thirsty,want water,water please",2500,Basic need
+I'm fine,FINE,status,FINE.mp4,"i'm fine,i'm okay,i'm good,all good",2000,Status update
+I'm tired,TIRED,status,TIRED.mp4,"i'm tired,exhausted,sleepy,need rest",2000,Physical state
+I'm hungry,HUNGRY,status,HUNGRY.mp4,"i'm hungry,need food,want to eat,starving",2000,Physical state
+open,OPEN,actions,OPEN.mp4,"open,unlock,turn on",1500,Action command
+close,CLOSE,actions,CLOSE.mp4,"close,shut,lock,turn off",1500,Action command
+good job,GOOD JOB,praise,GOOD-JOB.mp4,"good job,well done,great work,excellent",2500,Positive feedback
+congratulations,CONGRATULATIONS,praise,CONGRATULATIONS.mp4,"congratulations,congrats,well done,celebrate",3000,Celebration
