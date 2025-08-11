@@ -226,9 +226,18 @@ export const useWebSocket = (config: WebSocketConfig = {}): WebSocketHook => {
   // Send audio data
   const sendAudioData = useCallback((audioData: any) => {
     if (socketRef.current && isStreaming) {
+      console.log('Emitting audio-data to server:', {
+        dataLength: typeof audioData === 'string' ? audioData.length : 'unknown',
+        isStreaming,
+        socketConnected: socketRef.current.connected
+      });
       socketRef.current.emit('audio-data', audioData);
     } else {
-      console.warn('Cannot send audio data: not streaming or not connected');
+      console.warn('Cannot send audio data: not streaming or not connected', {
+        hasSocket: !!socketRef.current,
+        isStreaming,
+        socketConnected: socketRef.current?.connected
+      });
     }
   }, [isStreaming]);
 

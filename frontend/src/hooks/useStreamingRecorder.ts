@@ -23,6 +23,7 @@ export const useStreamingRecorder = (config: StreamingRecorderConfig): Streaming
     audioConstraints = {
       echoCancellation: true,
       noiseSuppression: true,
+      autoGainControl: true,
       sampleRate: 48000,
       channelCount: 1
     },
@@ -94,9 +95,32 @@ export const useStreamingRecorder = (config: StreamingRecorderConfig): Streaming
 
       streamRef.current = stream;
 
-      // Create MediaRecorder for streaming
+      // Create MediaRecorder for streaming - try different formats
+      let mimeType = 'audio/webm;codecs=opus';
+      
+      // Check supported formats and use the best available
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        console.warn('WEBM/Opus not supported, trying alternatives');
+        
+        const alternatives = [
+          'audio/webm',
+          'audio/mp4',
+          'audio/mpeg',
+          'audio/wav'
+        ];
+        
+        for (const alt of alternatives) {
+          if (MediaRecorder.isTypeSupported(alt)) {
+            mimeType = alt;
+            break;
+          }
+        }
+      }
+      
+      console.log('Using MediaRecorder with mimeType:', mimeType);
+      
       const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'audio/webm;codecs=opus'
+        mimeType: mimeType
       });
 
       mediaRecorderRef.current = mediaRecorder;
@@ -137,18 +161,10 @@ export const useStreamingRecorder = (config: StreamingRecorderConfig): Streaming
         }
       };
 
-      // Start recording
-      mediaRecorder.start();
+      // Start recording with timeslice for continuous data
+      mediaRecorder.start(chunkInterval);
       setIsRecording(true);
       setError(null);
-
-      // Set up interval to request data at regular intervals for streaming
-      intervalRef.current = setInterval(() => {
-        if (mediaRecorderRef.current && 
-            mediaRecorderRef.current.state === 'recording') {
-          mediaRecorderRef.current.requestData();
-        }
-      }, chunkInterval);
 
       console.log('Streaming recording started');
 
@@ -176,12 +192,6 @@ export const useStreamingRecorder = (config: StreamingRecorderConfig): Streaming
     }
 
     console.log('Stopping streaming recording');
-
-    // Stop the interval
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
 
     // Stop MediaRecorder
     if (mediaRecorderRef.current && 

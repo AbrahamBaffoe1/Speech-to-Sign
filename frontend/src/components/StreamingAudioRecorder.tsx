@@ -62,7 +62,18 @@ const StreamingAudioRecorder: React.FC<StreamingAudioRecorderProps> = ({
         // Convert ArrayBuffer to base64 for WebSocket transmission
         const uint8Array = new Uint8Array(audioData);
         const base64Audio = btoa(String.fromCharCode.apply(null, Array.from(uint8Array)));
+        
+        console.log('Sending audio data:', {
+          arrayBufferSize: audioData.byteLength,
+          base64Length: base64Audio.length
+        });
+        
         sendAudioData(base64Audio);
+      } else {
+        console.warn('Cannot send audio data - not connected or streaming', {
+          isStreaming,
+          isConnected
+        });
       }
     },
     onError: (error) => {
