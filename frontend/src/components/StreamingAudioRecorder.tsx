@@ -58,20 +58,23 @@ const StreamingAudioRecorder: React.FC<StreamingAudioRecorderProps> = ({
     error: recorderError
   } = useStreamingRecorder({
     onAudioData: (audioData) => {
-      if (isStreaming && isConnected) {
+      if (isStreamingConfirmed && isConnected) {
         // Convert ArrayBuffer to base64 for WebSocket transmission
         const uint8Array = new Uint8Array(audioData);
         const base64Audio = btoa(String.fromCharCode.apply(null, Array.from(uint8Array)));
         
         console.log('Sending audio data:', {
           arrayBufferSize: audioData.byteLength,
-          base64Length: base64Audio.length
+          base64Length: base64Audio.length,
+          isStreaming,
+          isStreamingConfirmed
         });
         
         sendAudioData(base64Audio);
       } else {
-        console.warn('Cannot send audio data - not connected or streaming', {
+        console.warn('Cannot send audio data - not confirmed streaming or not connected', {
           isStreaming,
+          isStreamingConfirmed,
           isConnected
         });
       }
@@ -83,6 +86,9 @@ const StreamingAudioRecorder: React.FC<StreamingAudioRecorderProps> = ({
       }
     }
   });
+
+  // Track when streaming actually starts
+  const [isStreamingConfirmed, setIsStreamingConfirmed] = useState(false);
 
   // Set up WebSocket event handlers
   useEffect(() => {
@@ -115,6 +121,16 @@ const StreamingAudioRecorder: React.FC<StreamingAudioRecorderProps> = ({
     });
   }, [onWsTranscriptUpdate, onWsSignsUpdate, onWsError, onTranscriptUpdate, onSignsUpdate, onError, transcript.final]);
 
+  // Update streaming confirmation state
+  useEffect(() => {
+    if (isStreaming) {
+      console.log('Streaming confirmed by WebSocket');
+      setIsStreamingConfirmed(true);
+    } else {
+      setIsStreamingConfirmed(false);
+    }
+  }, [isStreaming]);
+
   // Handle start/stop recording
   const handleToggleRecording = useCallback(async () => {
     if (isDisabled) return;
@@ -143,9 +159,33 @@ const StreamingAudioRecorder: React.FC<StreamingAudioRecorderProps> = ({
         }
 
         // Start WebSocket streaming first
+        console.log('Starting WebSocket streaming...');
         await startStreaming();
         
-        // Then start audio recording
+        // Wait for streaming to be confirmed by the server (up to 3 seconds)
+        console.log('Waiting for streaming confirmation...');
+        const streamingPromise = new Promise<void>((resolve, reject) => {
+          let attempts = 0;
+          const maxAttempts = 30; // 3 seconds
+          
+          const checkInterval = setInterval(() => {
+            attempts++;
+            console.log(`Streaming confirmation attempt ${attempts}/${maxAttempts}, isStreaming: ${isStreaming}`);
+            
+            if (isStreaming) {
+              clearInterval(checkInterval);
+              console.log('Streaming confirmed! Starting audio recording...');
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Streaming confirmation timeout'));
+            }
+          }, 100);
+        });
+        
+        await streamingPromise;
+        
+        // Now start audio recording
         await startRecording();
         
         // Clear previous transcript
